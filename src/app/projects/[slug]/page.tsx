@@ -11,7 +11,11 @@ import { Footer } from "@/components/layout/Footer";
 import { PageBackdrop } from "@/components/layout/PageBackdrop";
 import { Badge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/ui/Reveal";
-import { accentGradient, accentTone } from "@/components/sections/projectStyles";
+import {
+  accentTone,
+  coverFraming,
+  visualLabel,
+} from "@/components/sections/projectStyles";
 
 export const dynamicParams = false;
 
@@ -81,6 +85,9 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
   const prev = projects[(index - 1 + projects.length) % projects.length];
   const next = projects[(index + 1) % projects.length];
 
+  const cover = coverFraming(project);
+  const caption = visualLabel[project.visual ?? "screenshot"];
+
   const facts = [
     { label: "Organization", value: project.org },
     { label: "Role", value: project.role },
@@ -128,32 +135,41 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             </Reveal>
 
             <Reveal delay={0.1} className="mt-10">
-              <div
-                className={`relative aspect-[21/9] w-full overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br ${accentGradient[project.accent]}`}
-              >
+              <figure>
+                <div
+                  className={`relative w-full overflow-hidden rounded-3xl border border-white/10 ${cover.detailContainer} ${
+                    cover.isDiagram ? "aspect-video" : "aspect-[21/9]"
+                  }`}
+                >
+                  {project.image ? (
+                    <Image
+                      src={project.image}
+                      alt={`${project.title} ${caption.toLowerCase()}`}
+                      fill
+                      priority
+                      sizes="(max-width: 1152px) 100vw, 1152px"
+                      className={cover.image}
+                    />
+                  ) : (
+                    <>
+                      <div className="grid-bg absolute inset-0" />
+                      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 sm:p-8">
+                        <span className="font-mono text-xs uppercase tracking-widest text-white/70">
+                          {project.org}
+                        </span>
+                        <span className="font-mono text-xs text-white/50">
+                          {caption} coming soon
+                        </span>
+                      </div>
+                    </>
+                  )}
+                </div>
                 {project.image ? (
-                  <Image
-                    src={project.image}
-                    alt={`${project.title} screenshot`}
-                    fill
-                    priority
-                    sizes="(max-width: 1152px) 100vw, 1152px"
-                    className="object-cover"
-                  />
-                ) : (
-                  <>
-                    <div className="grid-bg absolute inset-0" />
-                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 sm:p-8">
-                      <span className="font-mono text-xs uppercase tracking-widest text-white/70">
-                        {project.org}
-                      </span>
-                      <span className="font-mono text-xs text-white/50">
-                        Screenshot coming soon
-                      </span>
-                    </div>
-                  </>
-                )}
-              </div>
+                  <figcaption className="mt-3 font-mono text-xs text-muted">
+                    {caption}
+                  </figcaption>
+                ) : null}
+              </figure>
             </Reveal>
 
             <div className="mt-16 grid gap-12 lg:grid-cols-3">

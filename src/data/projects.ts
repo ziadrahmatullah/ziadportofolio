@@ -39,6 +39,11 @@ export type Project = {
   highlights: string[];
   stack: string[];
   links?: ProjectLink[];
+  /**
+   * What the cover actually is. Diagrams are shown uncropped on a flat
+   * background; screenshots and photos fill the frame.
+   */
+  visual?: "screenshot" | "diagram" | "photo";
   image?: string;
   gallery?: string[];
   /** Used for the gradient fallback cover. */
@@ -83,6 +88,7 @@ export const projects: Project[] = [
       "Removed third-party gateway fees for the building.",
     ],
     stack: ["Go", "REST API", "Bank API", "Webhooks"],
+    visual: "diagram",
     image: "/projects/bni-direct.png",
     accent: "cyan",
     featured: true,
@@ -113,6 +119,7 @@ export const projects: Project[] = [
       "Expanded Yipy's payment coverage to a second major Indonesian bank.",
     ],
     stack: ["Go", "REST API", "Bank API", "Webhooks"],
+    visual: "diagram",
     image: "/projects/bsi-direct.png",
     accent: "cyan",
   },
@@ -144,6 +151,7 @@ export const projects: Project[] = [
       "Gave management visibility into facility entry and exit.",
     ],
     stack: ["Go", "ZKTeco", "REST API", "Access Control"],
+    visual: "photo",
     image: "/projects/gate-card-membership.png",
     accent: "violet",
     featured: true,
@@ -176,6 +184,7 @@ export const projects: Project[] = [
       "Worked alongside a second backend engineer who handled the MINNO server link.",
     ],
     stack: ["Go", "IoT", "OTP", "Push Notifications"],
+    visual: "photo",
     image: "/projects/yipybox.png",
     gallery: ["/projects/yipybox-2.png", "/projects/yipybox-3.png"],
     accent: "emerald",
@@ -209,6 +218,7 @@ export const projects: Project[] = [
       "Battery-powered water meters and mains-powered electricity meters on one integration.",
     ],
     stack: ["Go", "LoRa", "IoT", "REST API"],
+    visual: "photo",
     image: "/projects/smart-meters.png",
     accent: "emerald",
   },
@@ -239,6 +249,7 @@ export const projects: Project[] = [
       "Enforced at the API layer, not just in the UI.",
     ],
     stack: ["Go", "RBAC", "REST API"],
+    visual: "diagram",
     image: "/projects/module-access-revamp.png",
     accent: "amber",
   },
@@ -271,6 +282,7 @@ export const projects: Project[] = [
       "QR code registration and check-in.",
     ],
     stack: ["Go", "Xendit", "QR Code", "Email Blast", "REST API"],
+    visual: "screenshot",
     image: "/projects/ies-2026.png",
     accent: "rose",
     featured: true,
@@ -295,6 +307,7 @@ export const projects: Project[] = [
     outcomes: ["Door check-in handled by QR scan."],
     highlights: ["QR code based check-in.", "CMS for user management."],
     stack: ["Go", "QR Code", "CMS"],
+    visual: "screenshot",
     image: "/projects/iits-2025.png",
     accent: "rose",
   },
@@ -318,6 +331,7 @@ export const projects: Project[] = [
     outcomes: ["The microsite team can publish content without backend changes."],
     highlights: ["Microsite content API.", "QR code registration and scanning."],
     stack: ["Go", "QR Code", "CMS", "REST API"],
+    visual: "screenshot",
     image: "/projects/iits-2026.png",
     accent: "rose",
   },
@@ -341,6 +355,7 @@ export const projects: Project[] = [
     outcomes: ["Both event categories are handled by one backend with separate flows."],
     highlights: ["Two registration tracks in one system.", "Full content CMS."],
     stack: ["Go", "CMS", "REST API"],
+    visual: "screenshot",
     image: "/projects/smi-event.png",
     accent: "rose",
   },
@@ -374,6 +389,7 @@ export const projects: Project[] = [
       "Docker + Nginx deployment on a VPS.",
     ],
     stack: ["Go", "Next.js", "Tailwind CSS", "Docker", "Nginx"],
+    visual: "screenshot",
     image: "/projects/dmi-kuningan.png",
     accent: "violet",
   },
@@ -403,6 +419,7 @@ export const projects: Project[] = [
       "End-to-end ownership: backend, frontend, and deployment.",
     ],
     stack: ["Go", "Next.js", "Tailwind CSS", "Docker", "Nginx"],
+    visual: "screenshot",
     image: "/projects/gbb-portal.png",
     accent: "violet",
     featured: true,
@@ -436,6 +453,7 @@ export const projects: Project[] = [
       "Auction module for partner companies.",
     ],
     stack: ["Go", "Next.js", "PostgreSQL", "Docker"],
+    visual: "screenshot",
     image: "/projects/ecosolex-erp.png",
     accent: "amber",
   },
@@ -460,6 +478,7 @@ export const projects: Project[] = [
     outcomes: ["Alumni registered online and entered the event with a QR pass."],
     highlights: ["QR code entry passes.", "Random doorprize draw feature."],
     stack: ["Go", "Next.js", "Xendit", "QR Code"],
+    visual: "screenshot",
     image: "/projects/reuni-sman2-kuningan.png",
     accent: "amber",
   },
@@ -481,6 +500,7 @@ export const projects: Project[] = [
     ],
     highlights: ["Pharmacy management.", "Online doctor consultation.", "Medicine e-commerce."],
     stack: ["Go", "REST API"],
+    visual: "screenshot",
     image: "/projects/everhealth.png",
     accent: "emerald",
   },

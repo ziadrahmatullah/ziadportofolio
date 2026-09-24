@@ -8,7 +8,7 @@ import { ArrowUpRight } from "lucide-react";
 import { projectCategories, projects, type ProjectCategory } from "@/data/projects";
 import { Section } from "@/components/ui/Section";
 import { Badge } from "@/components/ui/Badge";
-import { accentGradient, accentTone } from "./projectStyles";
+import { accentTone, coverFraming, visualLabel } from "./projectStyles";
 
 type Filter = "All" | ProjectCategory;
 
@@ -59,7 +59,9 @@ export function Projects() {
 
       <motion.ul layout className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence mode="popLayout">
-          {visible.map((p) => (
+          {visible.map((p) => {
+            const cover = coverFraming(p);
+            return (
             <motion.li
               key={p.slug}
               layout
@@ -73,15 +75,17 @@ export function Projects() {
                 className="glass group flex h-full w-full flex-col overflow-hidden rounded-2xl text-left transition-colors hover:border-cyan-400/30"
               >
                 <div
-                  className={`relative h-36 w-full overflow-hidden bg-gradient-to-br ${accentGradient[p.accent]}`}
+                  className={`relative h-36 w-full overflow-hidden ${cover.cardContainer}`}
                 >
-                  {p.image ? (
+                  {p.image && cover.showImageOnCard ? (
                     <Image
                       src={p.image}
                       alt={`${p.title} screenshot`}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className={`${cover.image} transition-transform duration-500 ${
+                        cover.isDiagram ? "p-2" : "group-hover:scale-105"
+                      }`}
                     />
                   ) : (
                     <>
@@ -89,6 +93,11 @@ export function Projects() {
                       <span className="absolute bottom-3 left-4 font-mono text-xs uppercase tracking-widest text-white/70">
                         {p.org}
                       </span>
+                      {p.visual ? (
+                        <span className="absolute bottom-3 right-4 font-mono text-[10px] uppercase tracking-widest text-white/50">
+                          {visualLabel[p.visual].split(" ")[0]}
+                        </span>
+                      ) : null}
                     </>
                   )}
                   <div className="absolute right-3 top-3 flex gap-2">
@@ -119,7 +128,8 @@ export function Projects() {
                 </div>
               </Link>
             </motion.li>
-          ))}
+            );
+          })}
         </AnimatePresence>
       </motion.ul>
     </Section>

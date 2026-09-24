@@ -37,6 +37,25 @@ Key fields per project:
 | `image` / `gallery` | Cover and extra screenshots (optional). |
 | `links` | Demo or repository links (optional). |
 
+### What each project shows
+
+Not every project can honestly show a screenshot. A backend integration has no screen of its own, and several systems hold client data that should not be published. Each project therefore declares a `visual` in `src/data/projects.ts`:
+
+| `visual` | Meaning | How it renders |
+| --- | --- | --- |
+| `screenshot` | A real screen you built | Fills the frame, cropped to fit |
+| `diagram` | Architecture or flow diagram | Shown uncropped on the project page; cards fall back to the gradient cover |
+| `photo` | Photo of deployed hardware | Fills the frame, cropped to fit |
+
+Two diagrams are already real, not placeholders: `bni-direct.png` (payment sequence) and `bsi-direct.png` (shared payment architecture). Every other image is still a placeholder.
+
+Suggested plan for the rest:
+
+- **Screenshots** for the public-facing sites: DMI Kuningan, the SMAN 2 Kuningan reunion, and the public registration pages for IES 2026, IITS, and SMI.
+- **Hardware photos** for the IoT work: YipyBox, the Andara gate reader, and the smart meters.
+- **Diagrams** for backend-only work: the module and access control revamp still needs one.
+- **Redact first** if you use internal screens from GBB, Ecosolex, or the Yipy CMS. Replace real names and figures with sample data.
+
 ### Photos to prepare
 
 Placeholder images are already in place, wired into the data, and named exactly as the final files. Replace a file in place, keep the same name, and nothing else needs changing.
