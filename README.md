@@ -39,34 +39,40 @@ Key fields per project:
 
 ### What each project shows
 
-Not every project can honestly show a screenshot. A backend integration has no screen of its own, and several systems hold client data that should not be published. Each project therefore declares a `visual` in `src/data/projects.ts`:
+Not every project can honestly show a screenshot. A backend integration has no screen of its own, several of these systems hold client data that should not be published, and on some the frontend was built by someone else. So every cover is a hand-drawn diagram of how the system actually works.
+
+Each project declares a `visual` in `src/data/projects.ts`:
 
 | `visual` | Meaning | How it renders |
 | --- | --- | --- |
+| `diagram` | Architecture or flow diagram | Uncropped on the project page; cards use the gradient cover |
 | `screenshot` | A real screen you built | Fills the frame, cropped to fit |
-| `diagram` | Architecture or flow diagram | Shown uncropped on the project page; cards fall back to the gradient cover |
 | `photo` | Photo of deployed hardware | Fills the frame, cropped to fit |
 
-Two diagrams are already real, not placeholders: `bni-direct.png` (payment sequence) and `bsi-direct.png` (shared payment architecture). Every other image is still a placeholder.
+All fifteen covers are currently diagrams, and all fifteen are real artwork rather than placeholders. A caption under each one names what the reader is looking at.
 
-Suggested plan for the rest:
+### Replacing a diagram with a real image
 
-- **Screenshots** for the public-facing sites: DMI Kuningan, the SMAN 2 Kuningan reunion, and the public registration pages for IES 2026, IITS, and SMI.
-- **Hardware photos** for the IoT work: YipyBox, the Andara gate reader, and the smart meters.
-- **Diagrams** for backend-only work: the module and access control revamp still needs one.
+The diagrams stand on their own, so nothing is blocked. Swap one only when a real image says more:
+
+1. Save the file over `public/projects/<slug>.png`, at 1600 × 900 and under about 500 KB.
+2. Change that project's `visual` to `screenshot` or `photo` in `src/data/projects.ts`.
+
+Worth doing when you have them:
+
+- **Screenshots** of the public-facing sites: DMI Kuningan, the SMAN 2 Kuningan reunion, and the public registration pages for IES 2026, IITS, and SMI.
+- **Photos** of the IoT hardware: YipyBox, the Andara gate reader, and the smart meters.
 - **Redact first** if you use internal screens from GBB, Ecosolex, or the Yipy CMS. Replace real names and figures with sample data.
 
-### Photos to prepare
+Extra images go in a `gallery` array on the same project and appear lower down the page:
 
-Placeholder images are already in place, wired into the data, and named exactly as the final files. Replace a file in place, keep the same name, and nothing else needs changing.
+```ts
+gallery: ["/projects/yipybox-2.png", "/projects/yipybox-3.png"],
+```
 
-| What | File | Size | Required |
-| --- | --- | --- | --- |
-| Profile photo | `public/avatar.jpg` | 800 × 800 (square) | Optional |
-| Project cover (15×) | `public/projects/<slug>.png` | 1600 × 900 (16:9) | 1 per project |
-| Project gallery | `public/projects/<slug>-2.png`, `-3.png`, … | 1600 × 900 (16:9) | Optional, max 4 |
+### Profile photo
 
-Keep each file under about 500 KB. If you save a photo as `.jpg` where the placeholder is `.png`, also update that project's `image` line in `src/data/projects.ts`.
+`public/avatar.jpg` is the one remaining placeholder. Replace it with a square photo, 800 × 800. To hide the photo entirely, set `avatar: ""` in `src/data/profile.ts`.
 
 Project slugs, in the order they appear on the site:
 
@@ -77,21 +83,6 @@ ies-2026                iits-2025             iits-2026
 smi-event               dmi-kuningan          gbb-portal
 ecosolex-erp            reuni-sman2-kuningan  everhealth
 ```
-
-To add gallery shots to a project, drop the files in and list them:
-
-```ts
-gallery: ["/projects/yipybox-2.png", "/projects/yipybox-3.png"],
-```
-
-`yipybox` already has two gallery placeholders as a working example. To hide the profile photo, set `avatar: ""` in `src/data/profile.ts`.
-
-### Adding project screenshots
-
-1. Drop the image into `public/projects/` (e.g. `public/projects/yipybox.png`). Recommended size: 1600×900 (16:9), PNG or JPG under 500 KB.
-2. Set `image: "/projects/yipybox.png"` on the matching project in `src/data/projects.ts`. Add more shots with `gallery: ["/projects/yipybox-2.png"]`.
-
-Cards and pages without an image fall back to a generated gradient cover.
 
 ### Contact links
 
